@@ -4,7 +4,11 @@ import Searchbar from './components/Searchbar';
 
 import { fetchImages } from './components/services/Api';
 
-import ImageGallery from './components/ImageGallery/';
+import ImageGallery from './components/ImageGallery';
+
+import Modal from './components/Modal';
+
+import { AppContainer } from './App.styles';
 
 export default class App extends Component {
   state = {
@@ -12,10 +16,7 @@ export default class App extends Component {
     images: [],
     status: '',
     page: 1,
-  };
-
-  handleFormSubmit = imageName => {
-    this.setState({ imageName });
+    showModal: false,
   };
 
   async componentDidUpdate(_, prevState) {
@@ -26,12 +27,22 @@ export default class App extends Component {
     }
   }
 
+  handleFormSubmit = imageName => {
+    this.setState({ imageName });
+  };
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
+  };
+
   render() {
+    const { images, showModal } = this.state;
     return (
-      <div>
+      <AppContainer>
         <Searchbar onSearch={this.handleFormSubmit} />
-        <ImageGallery images={this.state.images} />
-      </div>
+        <ImageGallery images={images} />
+        {showModal && <Modal />}
+      </AppContainer>
     );
   }
 }
