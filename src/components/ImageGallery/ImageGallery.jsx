@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { Gallery } from './ImageGallery.styles';
 import ImageGalleryItem from '../ImageGalleryItem';
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, onSelect }) => {
   return (
     <Gallery>
-      {images.map(({ id, webformatURL, tags }) => (
+      {images.map(({ id, webformatURL, tags, largeImageURL }) => (
         <ImageGalleryItem
           key={id}
-          id={id}
           webformatURL={webformatURL}
+          largeImageURL={largeImageURL}
           tags={tags}
+          onSelect={onSelect}
         />
       ))}
     </Gallery>
@@ -21,7 +22,7 @@ const ImageGallery = ({ images }) => {
 ImageGallery.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
       webformatURL: PropTypes.string,
       tags: PropTypes.string,
     }),

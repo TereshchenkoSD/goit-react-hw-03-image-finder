@@ -17,6 +17,10 @@ export default class App extends Component {
     status: '',
     page: 1,
     showModal: false,
+    tags: '',
+    selectedImage: '',
+    loader: false,
+    error: null,
   };
 
   async componentDidUpdate(_, prevState) {
@@ -35,13 +39,20 @@ export default class App extends Component {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
   };
 
+  handleSelectedImage = data => {
+    this.setState({ selectedImage: data });
+    this.toggleModal();
+  };
+
   render() {
-    const { images, showModal } = this.state;
+    const { images, showModal, selectedImage } = this.state;
     return (
       <AppContainer>
         <Searchbar onSearch={this.handleFormSubmit} />
-        <ImageGallery images={images} />
-        {showModal && <Modal />}
+        <ImageGallery onSelect={this.handleSelectedImage} images={images} />
+        {showModal && (
+          <Modal onClose={this.toggleModal} largeImageURL={selectedImage} />
+        )}
       </AppContainer>
     );
   }

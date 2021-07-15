@@ -5,22 +5,23 @@ import {
   GalleryItemImage,
 } from '../ImageGalleryItem/ImageGalleryItem.styles';
 
-const imageGalleryItem = ({ id, webformatURL, tags }) => {
+const imageGalleryItem = ({ largeImageURL, webformatURL, tags, onSelect }) => {
   return (
-    <GalleryItem key={id}>
+    <GalleryItem>
       <GalleryItemImage
         src={webformatURL}
         alt={tags}
-        className="ImageGalleryItem-image"
+        onClick={() => onSelect(largeImageURL)}
       />
     </GalleryItem>
   );
 };
 
 imageGalleryItem.propTypes = {
-  id: PropTypes.string,
+  largeImageURL: PropTypes.string,
   webformatURL: PropTypes.string,
   tags: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default imageGalleryItem;
