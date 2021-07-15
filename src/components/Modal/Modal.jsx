@@ -2,9 +2,9 @@ import { createPortal } from 'react-dom';
 
 import PropTypes from 'prop-types';
 
-import { Overlay, ModalContainer } from './Modal.styles';
-
 import { Component } from 'react';
+
+import { Overlay, ModalContainer } from './Modal.styles';
 
 const modalRoot = document.querySelector('#modal-root');
 
